@@ -75,13 +75,8 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
-<<<<<<< HEAD
-    <Compile Include="Assets\Script\Enemyctr.cs" />
-    <Compile Include="Assets\Script\TestOkawa.cs" />
-    <Compile Include="Assets\Script\TestYoshikawa.cs" />
-=======
+    <Compile Include="Assets\Scripts\Enemyctr.cs" />
     <Compile Include="Assets\Scripts\Test.cs" />
->>>>>>> ac54efebe275d7ad971fec9416075cc39e1c6af5
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
