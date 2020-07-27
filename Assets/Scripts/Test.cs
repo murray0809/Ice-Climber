@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestOkawa : MonoBehaviour
+public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
-    //SourceTree用のテストフォルダです気にしないでください
     void Start()
     {
-        
+        Debug.Log("Test");      
     }
 
     // Update is called once per frame

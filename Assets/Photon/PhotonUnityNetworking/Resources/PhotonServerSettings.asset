@@ -39,5 +39,9 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   DisableAutoOpenWizard: 1
+<<<<<<< HEAD
   ShowSettings: 1
+=======
+  ShowSettings: 0
+>>>>>>> ac54efebe275d7ad971fec9416075cc39e1c6af5
   DevRegionSetOnce: 0
