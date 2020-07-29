@@ -11,10 +11,9 @@ public class Enemyctr : MonoBehaviour
     void Start()
     {
         rbd = GetComponent<Rigidbody2D>();
-         player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 dir = player.transform.position - this.transform.position;
@@ -22,5 +21,10 @@ public class Enemyctr : MonoBehaviour
 
         // プレイヤーに向かって飛ばす
         rbd.velocity = dir * moveSpeed;
+    }
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 }
