@@ -8,7 +8,7 @@ public class RoundTripEnemy : MonoBehaviour
     private int count;
     public int a = 1;
     public int limitCount = 200;
-
+    public bool enter = false;
     void Update()
     {
         count += 1;

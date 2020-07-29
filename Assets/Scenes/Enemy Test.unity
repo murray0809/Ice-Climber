@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 768115816}
   - component: {fileID: 768115815}
   - component: {fileID: 768115817}
+  - component: {fileID: 768115818}
   m_Layer: 0
   m_Name: flea
   m_TagString: Untagged
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7554f6d753aaa41bff7652490e6811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1
 --- !u!58 &768115817
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -334,6 +335,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.67
+--- !u!114 &768115818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768115812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998cbe84ac3bca14788419428261ba50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a: 2
+  limitCount: 100
+  enter: 0
 --- !u!1 &1240548198
 GameObject:
   m_ObjectHideFlags: 0
