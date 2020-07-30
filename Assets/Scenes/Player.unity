@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff33f4b619f8a5248843e6295b714f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 2
 --- !u!1 &1161171730
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff33f4b619f8a5248843e6295b714f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 2
 --- !u!50 &1518096154
 Rigidbody2D:
   serializedVersion: 4

@@ -6,9 +6,9 @@ using Photon.Pun;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;    // 移動早さ
+    [SerializeField] float moveSpeed = 2f;
 
-    float jumpForce = 500.0f;       // ジャンプ時に加える力
+    bool jump = false;
 
     Rigidbody2D rb;
     void Start()
@@ -17,17 +17,21 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        // 水平方向の入力を検出する
         float h = Input.GetAxisRaw("Horizontal");
-        if (h > 0)
-        {
-            // 入力に応じてパドルを水平方向に動かす
-            rb.velocity = h * Vector2.right * speed;
-        }
+        
+        Vector2 vel = rb.velocity;
+        vel.x = h * moveSpeed;
+        rb.velocity = vel;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            this.rb.AddForce(transform.up * this.jumpForce);
+        if (!jump && Input.GetButtonDown("Jump"))
+        { 
+            rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            jump = true;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        jump = false;
     }
 }
