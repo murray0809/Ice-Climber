@@ -10,7 +10,7 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
 {
     /// <summary>プレイヤーのプレハブ</summary>
     [SerializeField] string m_playerPrefabName = "Prefab";
-    [SerializeField] Transform[] m_spawnPositions;
+    [SerializeField] Transform[] m_spawnPositions = default;
 
     private void Awake()
     {
