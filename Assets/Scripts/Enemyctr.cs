@@ -7,13 +7,16 @@ public class Enemyctr : MonoBehaviour
     public float moveSpeed = 0f;
     Rigidbody2D rbd;
     GameObject player;
-    bool enter = false;
     Vector2 dir;
+    RoundTripEnemy roundTripEnemy;
+    circularmotion circularmotion;
     // Start is called before the first frame update
     void Start()
     {
         rbd = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        roundTripEnemy = GetComponent<RoundTripEnemy>();
+        circularmotion = GetComponent<circularmotion>();
     }
 
     void Update()
@@ -25,6 +28,14 @@ public class Enemyctr : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            if (roundTripEnemy)
+            {
+                roundTripEnemy.enter = true;
+            }
+            if (circularmotion)
+            {
+                circularmotion.enter = true;
+            }
             dir = player.transform.position - this.transform.position;
             dir = dir.normalized;
 
@@ -35,6 +46,14 @@ public class Enemyctr : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (roundTripEnemy)
+        {
+            roundTripEnemy.enter = false;
+        }
+        if (circularmotion)
+        {
+            circularmotion.enter = false;
+        }
         if (collision.gameObject.tag == "Player")
         {
             rbd.velocity = dir * 0;
