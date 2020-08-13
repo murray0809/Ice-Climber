@@ -151,9 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerPrefabName: Player
-  m_spawnPositions:
-  - {fileID: 1758876783}
-  - {fileID: 1544951700}
+  m_spawnPoint01: {fileID: 1758876783}
+  m_spawnPoint02: {fileID: 1544951700}
 --- !u!4 &709479679
 Transform:
   m_ObjectHideFlags: 0

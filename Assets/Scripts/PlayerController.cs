@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float jumpPower = 10f;
 
-    [SerializeField] float attackTime = 1f;
+    [SerializeField] float attackTime = 1f; //攻撃判定が消えるまでの時間
 
     bool jump = false; //ジャンプの接地判定
     bool right; //右を向いているか
     bool left; //左を向いているか
 
-    [SerializeField] GameObject attack = default;
+    bool attackedUp = false;
+    bool attackedRight = false;
+    bool attackedLeft = false;
+
+    [SerializeField] GameObject attackUp = default;
     [SerializeField] GameObject attackRight = default;
     [SerializeField] GameObject attackLeft = default;
 
@@ -25,9 +31,10 @@ public class PlayerController : MonoBehaviour
     {
         m_view = GetComponent<PhotonView>();
 
-        attack = GameObject.Find("Attack");
+        attackUp = GameObject.Find("Attack_Up");
         attackRight = GameObject.Find("Attack_Right");
         attackLeft = GameObject.Find("Attack_Left");
+
         attackTime = 0f;
 
         if (m_view)
@@ -41,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         right = true;
 
-        attack.SetActive(false);
+        attackUp.SetActive(false);
         attackRight.SetActive(false);
         attackLeft.SetActive(false);
     }
@@ -69,39 +76,81 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!jump && Input.GetButtonDown("Jump"))
-        { 
+        {
             m_rb.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
             jump = true;
         }
 
         if (jump && Input.GetButtonDown("Fire1"))
         {
-            attack.SetActive(true);
-            attackTime = 1f;
-            Debug.Log("攻撃した");
+            m_view.RPC("AttackUp", RpcTarget.All);
         }
         if (right && Input.GetButtonDown("Fire1"))
         {
-            attackRight.SetActive(true);
-            attackTime = 1f;
-            Debug.Log("攻撃した");
+            m_view.RPC("AttackRight", RpcTarget.All);
         }
         if (left && Input.GetButtonDown("Fire1"))
         {
-            attackLeft.SetActive(true);
-            attackTime = 1f;
-            Debug.Log("攻撃した");
+            m_view.RPC("AttackLeft", RpcTarget.All);
         }
-        if (attackTime <= 0)
+        if (attackTime <= 0 && attackedUp)
         {
-            attack.SetActive(false);
-            attackRight.SetActive(false);
-            attackLeft.SetActive(false);
+            m_view.RPC("AttackUpFinish", RpcTarget.All);
+        }
+        if (attackTime <= 0 && attackedRight)
+        {
+            m_view.RPC("AttackRightFinish", RpcTarget.All);
+        }
+        if (attackTime <= 0 && attackedLeft)
+        {
+            m_view.RPC("AttackLeftFinish", RpcTarget.All);
         }
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         jump = false;
+    }
+
+    [PunRPC]
+    void AttackUp()
+    {
+        attackUp.SetActive(true);
+        attackTime = 1f;
+        attackedUp = true;
+    }
+
+    [PunRPC]
+    void AttackRight()
+    {
+        attackRight.SetActive(true);
+        attackTime = 1f;
+        attackedRight = true;
+    }
+
+    [PunRPC]
+    void AttackLeft()
+    {
+        attackLeft.SetActive(true);
+        attackTime = 1f;
+        attackedLeft = true;
+    }
+
+    [PunRPC]
+    void AttackUpFinish()
+    {
+        attackUp.SetActive(false);
+    }
+
+    [PunRPC]
+    void AttackRightFinish()
+    {
+        attackRight.SetActive(false);
+    }
+
+    [PunRPC]
+    void AttackLeftFinish()
+    {
+        attackLeft.SetActive(false);
     }
 }
