@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] GameObject attackRight = default;
     [SerializeField] GameObject attackLeft = default;
 
+    [SerializeField] Animator m_anim;
+
     Rigidbody2D m_rb;
     PhotonView m_view;
     void Start()
@@ -58,9 +60,57 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         float h = Input.GetAxisRaw("Horizontal");
 
-        Vector2 vel = m_rb.velocity;
-        vel.x = h * moveSpeed;
-        m_rb.velocity = vel;
+        if (m_anim)
+        {
+            Vector2 vel = m_rb.velocity;
+            vel.x = h * moveSpeed;
+            m_rb.velocity = vel;
+
+            if (left)
+            {
+                m_anim.SetBool("Idle_left", true);
+
+                if (vel.x < 0)
+                {
+                    m_anim.SetBool("Walk_left", true);
+                }
+                else
+                {
+                    m_anim.SetBool("Walk_left", false);
+                }
+
+                if (jump)
+                {
+                    m_anim.SetBool("Jump_left", true);
+                }
+                else
+                {
+                    m_anim.SetBool("Jump_left", false);
+                }
+            }
+            else
+            {
+                m_anim.SetBool("Idle_left", false);
+            }
+
+            if (vel.x > 0)
+            {
+                m_anim.SetBool("Run", true);
+            }
+            else
+            {
+                m_anim.SetBool("Run", false);
+            }
+
+            if (jump)
+            {
+                m_anim.SetBool("Jump", true);
+            }
+            else
+            {
+                m_anim.SetBool("Jump", false);
+            }
+        }
 
         attackTime -= 0.1f;
 
@@ -87,10 +137,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
         if (right && Input.GetButtonDown("Fire1"))
         {
+            if (m_anim)
+            {
+                m_anim.SetBool("Attack", true);
+            }
             m_view.RPC("AttackRight", RpcTarget.All);
         }
         if (left && Input.GetButtonDown("Fire1"))
         {
+            if (m_anim)
+            {
+                m_anim.SetBool("Attack_left", true);
+            }
             m_view.RPC("AttackLeft", RpcTarget.All);
         }
         if (attackTime <= 0 && attackedUp)
@@ -99,10 +157,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
         if (attackTime <= 0 && attackedRight)
         {
+            if (m_anim)
+            {
+                m_anim.SetBool("Attack", false);
+            }
             m_view.RPC("AttackRightFinish", RpcTarget.All);
         }
         if (attackTime <= 0 && attackedLeft)
         {
+            if (m_anim)
+            {
+                m_anim.SetBool("Attack_left", false);
+            }
             m_view.RPC("AttackLeftFinish", RpcTarget.All);
         }
     }
