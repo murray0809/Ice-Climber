@@ -21,9 +21,9 @@ public class Enemyctr : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("侵入");
+        
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -42,6 +42,16 @@ public class Enemyctr : MonoBehaviour
             // プレイヤーに向かって飛ばす
             rbd.velocity = dir * moveSpeed;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("痛い");
+        if (collision.gameObject.tag == "Attack")
+        {
+            
+            Destroy(this.gameObject);
+        }  
     }
 
     void OnTriggerExit2D(Collider2D collision)

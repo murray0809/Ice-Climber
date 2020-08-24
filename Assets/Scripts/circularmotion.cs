@@ -26,6 +26,15 @@ public class circularmotion : MonoBehaviour
 
             transform.position = new Vector2(x + position.x, y + position.y);
         }
-        
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("痛い");
+        if (collision.gameObject.tag == "Attack")
+        {
+
+            Destroy(this.gameObject);
+        }
     }
 }
