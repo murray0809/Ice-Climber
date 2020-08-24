@@ -6,18 +6,19 @@ public class UnderBlockTrigger : MonoBehaviour
 {
     [SerializeField] public GameObject m_block;
     private BrokenBrockController BrokenBrockController;
+
     void Start()
     {
         BrokenBrockController = m_block.GetComponent<BrokenBrockController>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         BrokenBrockController.IsUnder = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        BrokenBrockController.IsUnder = true;
+        BrokenBrockController.IsUnder = false;
     }
 }

@@ -8,6 +8,6 @@ public class CloudController : MonoBehaviour
     void Update()
     {
         x += speed;
-        transform.position = new Vector2(x, 0);
+        transform.position = new Vector2(x, transform.position.y);
     }
 }
