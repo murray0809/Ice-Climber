@@ -6,6 +6,7 @@ public class BrokenBrockController : MonoBehaviour
 {
     public bool IsUnder;
     //[SerializeField] private bool IsBroken = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsUnder)

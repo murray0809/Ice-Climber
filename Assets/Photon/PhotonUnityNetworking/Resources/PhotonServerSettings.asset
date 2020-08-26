@@ -38,6 +38,14 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - AttackRight
+  - Destroy
+  - AttackLeft
+  - AttackUp
+  - AttackFinish
+  - AttackUpFinish
+  - AttackLeftFinish
+  - AttackRightFinish
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1
