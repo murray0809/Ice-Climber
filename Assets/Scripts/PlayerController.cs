@@ -4,6 +4,7 @@ using UnityEngine;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using Cinemachine;  // Cinemachine を使うため
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviourPunCallbacks
@@ -39,12 +40,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         attackTime = 0f;
 
+        CinemachineVirtualCamera vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+
         if (m_view)
         {
             if (m_view.IsMine)
             {
                 // 同期元（自分で操作して動かす）オブジェクトの場合のみ Rigidbody を使う
                 m_rb = GetComponent<Rigidbody2D>();
+
+                if (vCam)
+                {
+                    vCam.Follow = transform;
+                }
             }
         }
 
