@@ -9,16 +9,29 @@ public class UnderBlockTrigger : MonoBehaviour
 
     void Start()
     {
-        BrokenBrockController = m_block.GetComponent<BrokenBrockController>();
+        BrokenBrockController = transform.parent.GetComponent<BrokenBrockController>();
     }
+
+    //private void Update()
+    //{
+    //    BrokenBrockController.IsUnder = false;
+    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        BrokenBrockController.IsUnder = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            BrokenBrockController.IsUnder = true;
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        BrokenBrockController.IsUnder = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            BrokenBrockController.IsUnder = false;
+        }
+        
     }
 }
