@@ -11,6 +11,8 @@ public class CloudController : MonoBehaviour
     }
     void Update()
     {
-        rb.velocity = new Vector2(speed, 0);
+        //Debug.Log(rb.velocity);
+        //rb.velocity = new Vector2(speed, 0);
+        this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
     }
 }
