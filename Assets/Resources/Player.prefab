@@ -185,7 +185,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
+  nockBack: 50
   attackTime: 1
+  renderer: {fileID: 1606096187832508403}
+  mutekiJikan: 4
   attackUp: {fileID: 0}
   attackRight: {fileID: 0}
   attackLeft: {fileID: 0}
@@ -357,7 +360,7 @@ GameObject:
   - component: {fileID: 2402858813419853518}
   m_Layer: 0
   m_Name: Attack_Right
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,7 +417,7 @@ GameObject:
   - component: {fileID: 3552042808925799184}
   m_Layer: 0
   m_Name: Attack_Left
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
