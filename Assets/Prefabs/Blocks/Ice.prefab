@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5175835108698416008}
   - component: {fileID: 5175835108698416009}
   - component: {fileID: 5175835108698416010}
-  m_Layer: 0
+  - component: {fileID: -4742135361316174904}
+  m_Layer: 9
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +124,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUnder: 0
+--- !u!50 &-4742135361316174904
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175835108698416011}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &5175835108946397189
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +156,7 @@ GameObject:
   - component: {fileID: 5175835108946397188}
   - component: {fileID: 5175835108946397186}
   - component: {fileID: 5175835108946397187}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +201,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.55, y: 0.2}
+  m_Size: {x: 1.1, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &5175835108946397187
 MonoBehaviour:

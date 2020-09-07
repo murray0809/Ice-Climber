@@ -3,11 +3,14 @@
 public class CloudController : MonoBehaviour
 {
     [SerializeField] private float speed = 0;
-    private float x;
+    private Rigidbody2D rb;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
-        x += speed;
-        transform.position = new Vector2(x, 0);
+        rb.velocity = new Vector2(speed, 0);
     }
 }

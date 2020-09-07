@@ -33,19 +33,17 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - AttackLeft
+  - AttackLeftFinish
+  - AttackRight
+  - AttackRightFinish
+  - AttackUp
+  - AttackUpFinish
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - AttackRight
-  - Destroy
-  - AttackLeft
-  - AttackUp
-  - AttackFinish
-  - AttackUpFinish
-  - AttackLeftFinish
-  - AttackRightFinish
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
