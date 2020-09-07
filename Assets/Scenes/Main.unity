@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_another: {fileID: 1863339550}
+  a: 1.1
 --- !u!61 &67398088
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1276,6 +1277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 362
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134538840562272868, guid: aaff226b1d67f8046b26f14a973c6866,
+        type: 3}
+      propertyPath: speed
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1144299824387719155, guid: aaff226b1d67f8046b26f14a973c6866,
         type: 3}
@@ -4736,6 +4742,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5356982033187361722, guid: aaff226b1d67f8046b26f14a973c6866,
+        type: 3}
+      propertyPath: speed
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5359632465767482096, guid: aaff226b1d67f8046b26f14a973c6866,
         type: 3}
@@ -8395,6 +8406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_another: {fileID: 67398086}
+  a: 1.1
 --- !u!61 &1863339552
 BoxCollider2D:
   m_ObjectHideFlags: 0
