@@ -33,7 +33,6 @@ public class circularmotion : MonoBehaviour
         Debug.Log("痛い");
         if (collision.gameObject.tag == "Attack")
         {
-
             Destroy(this.gameObject);
         }
     }
