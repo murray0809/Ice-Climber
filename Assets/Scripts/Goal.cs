@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Goal : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Goal : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Text goal = text.GetComponent<Text>();
-            goal.text = "Goal!!";
+            goal.text = PhotonNetwork.LocalPlayer.ActorNumber + "P Goal!!";
         }
     }
 }
