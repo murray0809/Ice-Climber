@@ -11,15 +11,26 @@ public class RoundTripEnemy : MonoBehaviour
     public bool enter = false;
     void Update()
     {
-        count += 1;
-        transform.Translate(a * Vector2.left * Time.deltaTime);
-
-        if (count == limitCount)
+        if (!enter)
         {
-            count = 0;
-            // 反転テクニック・・・＞-1を掛ける
-            //a = a * -1;
-            a *= -1;
+            count += 1;
+            transform.Translate(a * Vector2.left * Time.deltaTime);
+
+            if (count == limitCount)
+            {
+                count = 0;
+                // 反転テクニック・・・＞-1を掛ける
+                //a = a * -1;
+                a *= -1;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Attack")
+        {
+            Destroy(this.gameObject);
         }
     }
 }

@@ -7,24 +7,36 @@ public class Enemyctr : MonoBehaviour
     public float moveSpeed = 0f;
     Rigidbody2D rbd;
     GameObject player;
-    bool enter = false;
     Vector2 dir;
+    RoundTripEnemy roundTripEnemy;
+    circularmotion circularmotion;
     // Start is called before the first frame update
     void Start()
     {
         rbd = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        roundTripEnemy = GetComponent<RoundTripEnemy>();
+        circularmotion = GetComponent<circularmotion>();
     }
 
     void Update()
     {
-        //Debug.Log("侵入");
+        
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("敵侵入");
+            if (roundTripEnemy)
+            {
+                roundTripEnemy.enter = true;
+            }
+            if (circularmotion)
+            {
+                circularmotion.enter = true;
+            }
             dir = player.transform.position - this.transform.position;
             dir = dir.normalized;
 
@@ -33,8 +45,26 @@ public class Enemyctr : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.tag == "Attack")
+        {
+            Debug.Log("痛い");
+            Destroy(this.gameObject);
+        }  
+    }
+
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (roundTripEnemy)
+        {
+            roundTripEnemy.enter = false;
+        }
+        if (circularmotion)
+        {
+            circularmotion.enter = false;
+        }
         if (collision.gameObject.tag == "Player")
         {
             rbd.velocity = dir * 0;
