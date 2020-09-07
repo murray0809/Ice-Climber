@@ -28,6 +28,7 @@ public class Enemyctr : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("敵侵入");
             if (roundTripEnemy)
             {
                 roundTripEnemy.enter = true;
@@ -46,10 +47,10 @@ public class Enemyctr : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("痛い");
+        
         if (collision.gameObject.tag == "Attack")
         {
-            
+            Debug.Log("痛い");
             Destroy(this.gameObject);
         }  
     }
