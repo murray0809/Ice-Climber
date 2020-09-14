@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         // プレイヤーの位置を後ろに飛ばす
         float s = nockBack * Time.deltaTime;
-        transform.Translate(Vector3.up * s);
+        transform.Translate(Vector3.forward * s);
 
         // プレイヤーのlocalScaleでどちらを向いているのかを判定
         if (transform.localScale.x >= 0)
@@ -247,6 +247,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
         // １秒後ダメージフラグをfalseにして点滅を戻す
         damage = false;
         renderer.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    public void Raise()
+    {
+        //イベントとして送るものを作る
+        byte eventCode = 0; // イベントコード 0~199 まで指定できる。200 以上はシステムで使われているので使えない。
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+        {
+            Receivers = ReceiverGroup.All,  // 全体に送る 他に MasterClient, Others が指定できる
+        };  // イベントの起こし方
+        SendOptions sendOptions = new SendOptions(); // オプションだが、特に何も指定しない
+        int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+        // イベントを起こす
+        PhotonNetwork.RaiseEvent(eventCode, actorNumber, raiseEventOptions, sendOptions);
     }
 
     [PunRPC]
