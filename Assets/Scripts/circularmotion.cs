@@ -28,12 +28,10 @@ public class circularmotion : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("痛い");
         if (collision.gameObject.tag == "Attack")
         {
-
             Destroy(this.gameObject);
         }
     }

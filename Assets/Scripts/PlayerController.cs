@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         // プレイヤーの位置を後ろに飛ばす
         float s = nockBack * Time.deltaTime;
-        transform.Translate(Vector3.up * s);
+        transform.Translate(Vector3.forward * s);
 
         // プレイヤーのlocalScaleでどちらを向いているのかを判定
         if (transform.localScale.x >= 0)

@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
-  nockBack: 50
+  nockBack: -100
   attackTime: 1
   renderer: {fileID: 1606096187832508403}
   mutekiJikan: 4
