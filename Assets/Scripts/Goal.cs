@@ -39,8 +39,8 @@ public class Goal : MonoBehaviour
         {
             isGoal = true;
             goal.text = e.CustomData + "P Goal!!";
+            Time.timeScale = 0;
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

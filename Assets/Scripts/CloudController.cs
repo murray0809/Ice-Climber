@@ -9,8 +9,26 @@ public class CloudController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     void Update()
     {
-        rb.velocity = new Vector2(speed, 0);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.SetParent(null);
+        }
+
     }
 }
