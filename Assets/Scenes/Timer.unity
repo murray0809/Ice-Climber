@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e034fc39c3cf7044e8f06f1bc081a738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 10
+  time: 300
   minutes: 0
   second: 0
   timerText: {fileID: 2131592185}

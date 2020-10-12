@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] float nockBack = 10f;
 
     [SerializeField] float attackTime = 1f; //攻撃判定が消えるまでの時間
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer playerSprite;
     [SerializeField] float mutekiJikan = 4; //無敵時間
 
     bool jump = false; //ジャンプの接地判定
@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         attackLeft = GameObject.Find("Attack_Left");
 
         attackTime = 0f;
+
+        playerSprite = GetComponent<SpriteRenderer>(); 
 
         CinemachineVirtualCamera vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
@@ -76,54 +78,65 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
             if (m_anim)
             {
+                if (h < 0)
+                {
+                    playerSprite.flipX = true;
+                    m_anim.SetBool("Walk_left", true);
+                }
+                if (h > 0)
+                {
+                    playerSprite.flipX = false;
+                    m_anim.SetBool("Walk_left", true);
+                }
+
                 Vector2 vel = m_rb.velocity;
                 vel.x = h * moveSpeed;
                 m_rb.velocity = vel;
 
-                if (left)
-                {
-                    m_anim.SetBool("Idle_left", true);
+            //    if (left)
+            //    {
+            //        m_anim.SetBool("Idle_left", true);
 
-                    if (vel.x < 0)
-                    {
-                        m_anim.SetBool("Walk_left", true);
-                    }
-                    else
-                    {
-                        m_anim.SetBool("Walk_left", false);
-                    }
+            //        if (vel.x < 0)
+            //        {
+            //            m_anim.SetBool("Walk_left", true);
+            //        }
+            //        else
+            //        {
+            //            m_anim.SetBool("Walk_left", false);
+            //        }
 
-                    if (jump)
-                    {
-                        m_anim.SetBool("Jump_left", true);
-                    }
-                    else
-                    {
-                        m_anim.SetBool("Jump_left", false);
-                    }
-                }
-                else
-                {
-                    m_anim.SetBool("Idle_left", false);
-                }
+            //        if (jump)
+            //        {
+            //            m_anim.SetBool("Jump_left", true);
+            //        }
+            //        else
+            //        {
+            //            m_anim.SetBool("Jump_left", false);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        m_anim.SetBool("Idle_left", false);
+            //    }
 
-                if (vel.x > 0)
-                {
-                    m_anim.SetBool("Run", true);
-                }
-                else
-                {
-                    m_anim.SetBool("Run", false);
-                }
+            //    if (vel.x > 0)
+            //    {
+            //        m_anim.SetBool("Run", true);
+            //    }
+            //    else
+            //    {
+            //        m_anim.SetBool("Run", false);
+            //    }
 
-                if (jump)
-                {
-                    m_anim.SetBool("Jump", true);
-                }
-                else
-                {
-                    m_anim.SetBool("Jump", false);
-                }
+            //    if (jump)
+            //    {
+            //        m_anim.SetBool("Jump", true);
+            //    }
+            //    else
+            //    {
+            //        m_anim.SetBool("Jump", false);
+            //    }
             }
 
             attackTime -= 0.1f;
@@ -190,7 +203,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (damage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-            renderer.color = new Color(1f, 1f, 1f, level);
+            playerSprite.color = new Color(1f, 1f, 1f, level);
         }
     }
 
@@ -246,7 +259,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         // １秒後ダメージフラグをfalseにして点滅を戻す
         damage = false;
-        renderer.color = new Color(1f, 1f, 1f, 1f);
+        playerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void Raise()
