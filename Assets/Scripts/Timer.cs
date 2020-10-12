@@ -25,9 +25,7 @@ public class Timer : MonoBehaviour
             second = (int)time % 60;
 
             timerText.text = minutes+ ":" + second;
-            Debug.Log(minutes);
-            Debug.Log(second);
-
+          
             if (time <= 0)
             {
                 isWorking = false;
