@@ -15,17 +15,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] float nockBack = 10f;
 
     [SerializeField] float attackTime = 1f; //攻撃判定が消えるまでの時間
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer playerSprite;
     [SerializeField] float mutekiJikan = 4; //無敵時間
 
     bool jump = false; //ジャンプの接地判定
-    bool right; //右を向いているか
-    bool left; //左を向いているか
-
-    bool attackedUp = false;
+   
     bool attackedRight = false;
-    bool attackedLeft = false;
     bool damage = false;
+
+    Vector3 scale;
 
     [SerializeField] GameObject attackUp = default;
     [SerializeField] GameObject attackRight = default;
@@ -45,6 +43,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         attackTime = 0f;
 
+        playerSprite = GetComponent<SpriteRenderer>(); 
+
         CinemachineVirtualCamera vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
         if (m_view)
@@ -61,8 +61,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
             }
         }
 
-        right = true;
-
         attackUp.SetActive(false);
         attackRight.SetActive(false);
         attackLeft.SetActive(false);
@@ -70,74 +68,49 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void Update()
     {
         if (!m_view.IsMine) return;
+
+        attackTime -= 0.1f;
+
         if (!damage)
         {
             float h = Input.GetAxisRaw("Horizontal");
 
             if (m_anim)
             {
-                Vector2 vel = m_rb.velocity;
-                vel.x = h * moveSpeed;
-                m_rb.velocity = vel;
-
-                if (left)
+                if (h != 0)
                 {
-                    m_anim.SetBool("Idle_left", true);
-
-                    if (vel.x < 0)
+                    // キャラクターの向き制御
+                    Vector2 lscale = gameObject.transform.localScale;
+                    if ((lscale.x > 0 && h < 0)|| (lscale.x < 0 && h > 0))
                     {
-                        m_anim.SetBool("Walk_left", true);
-                    }
-                    else
-                    {
-                        m_anim.SetBool("Walk_left", false);
+                        lscale.x *= -1;
+                        gameObject.transform.localScale = lscale;
                     }
 
-                    if (jump)
-                    {
-                        m_anim.SetBool("Jump_left", true);
-                    }
-                    else
-                    {
-                        m_anim.SetBool("Jump_left", false);
-                    }
-                }
-                else
-                {
-                    m_anim.SetBool("Idle_left", false);
-                }
-
-                if (vel.x > 0)
-                {
+                    // アニメーション切り替え（走っている）
                     m_anim.SetBool("Run", true);
                 }
                 else
                 {
+                    // アニメーション切り替え（立っている）
                     m_anim.SetBool("Run", false);
                 }
 
-                if (jump)
-                {
-                    m_anim.SetBool("Jump", true);
-                }
-                else
-                {
-                    m_anim.SetBool("Jump", false);
-                }
+                Vector2 vel = m_rb.velocity;
+                vel.x = h * moveSpeed;
+                m_rb.velocity = vel;
             }
 
-            attackTime -= 0.1f;
+            if (jump)
+            {
+                m_anim.SetBool("Jump", true);
+            }
+            else
+            {
+               
+                m_anim.SetBool("Jump", false);
+            }
 
-            if (h > 0)
-            {
-                right = true;
-                left = false;
-            }
-            else if (h < 0)
-            {
-                right = false;
-                left = true;
-            }
 
             if (!jump && Input.GetButtonDown("Jump"))
             {
@@ -145,11 +118,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 jump = true;
             }
 
-            if (jump && Input.GetButtonDown("Fire1"))
-            {
-                m_view.RPC("AttackUp", RpcTarget.All);
-            }
-            if (right && Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 if (m_anim)
                 {
@@ -157,18 +126,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 }
                 m_view.RPC("AttackRight", RpcTarget.All);
             }
-            if (left && Input.GetButtonDown("Fire1"))
-            {
-                if (m_anim)
-                {
-                    m_anim.SetBool("Attack_left", true);
-                }
-                m_view.RPC("AttackLeft", RpcTarget.All);
-            }
-            if (attackTime <= 0 && attackedUp)
-            {
-                m_view.RPC("AttackUpFinish", RpcTarget.All);
-            }
+            
             if (attackTime <= 0 && attackedRight)
             {
                 if (m_anim)
@@ -177,20 +135,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 }
                 m_view.RPC("AttackRightFinish", RpcTarget.All);
             }
-            if (attackTime <= 0 && attackedLeft)
-            {
-                if (m_anim)
-                {
-                    m_anim.SetBool("Attack_left", false);
-                }
-                m_view.RPC("AttackLeftFinish", RpcTarget.All);
-            }
         }
         //ダメージを受けたときの点滅判定
         if (damage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-            renderer.color = new Color(1f, 1f, 1f, level);
+            playerSprite.color = new Color(1f, 1f, 1f, level);
         }
     }
 
@@ -246,7 +196,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         // １秒後ダメージフラグをfalseにして点滅を戻す
         damage = false;
-        renderer.color = new Color(1f, 1f, 1f, 1f);
+        playerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void Raise()
@@ -264,33 +214,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void AttackUp()
-    {
-        attackUp.SetActive(true);
-        attackTime = 1f;
-        attackedUp = true;
-    }
-
-    [PunRPC]
     void AttackRight()
     {
         attackRight.SetActive(true);
         attackTime = 1f;
         attackedRight = true;
-    }
-
-    [PunRPC]
-    void AttackLeft()
-    {
-        attackLeft.SetActive(true);
-        attackTime = 1f;
-        attackedLeft = true;
-    }
-
-    [PunRPC]
-    void AttackUpFinish()
-    {
-        attackUp.SetActive(false);
     }
 
     [PunRPC]
@@ -300,8 +228,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void AttackLeftFinish()
+    void AttackTimeReset()
     {
-        attackLeft.SetActive(false);
+        attackTime = 1f;
     }
 }

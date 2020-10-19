@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 143033388050960727}
   - component: {fileID: 3369160451557279356}
   - component: {fileID: 1497271147763400505}
+  - component: {fileID: 1854862565896297562}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -162,7 +163,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1.9354019
+  m_Mass: 1.8662636
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -187,7 +188,7 @@ MonoBehaviour:
   jumpPower: 5
   nockBack: -100
   attackTime: 1
-  renderer: {fileID: 1606096187832508403}
+  playerSprite: {fileID: 0}
   mutekiJikan: 4
   attackUp: {fileID: 0}
   attackRight: {fileID: 0}
@@ -303,6 +304,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Attack_left
+  - Type: 1
+    SynchronizeType: 0
+    Name: JampAttack
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -329,7 +333,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606096187832508400}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -348,6 +352,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.49}
   m_EdgeRadius: 0
+--- !u!70 &1854862565896297562
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606096187832508400}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.47}
+  m_Size: {x: 1.05, y: 1.51}
+  m_Direction: 0
 --- !u!1 &5278310270886251924
 GameObject:
   m_ObjectHideFlags: 0
