@@ -160,30 +160,38 @@ public class PlayerController : MonoBehaviourPunCallbacks
             if (collision.gameObject.tag == "enemy")
             {
                 Debug.Log("敵に当たった");
-                DamageEffect();
+                DamageEffect(collision.transform);
             }
         }
     }
 
     //敵に当たった時のどうするかの判定
-    void DamageEffect()
+    void DamageEffect(Transform tr)
     {
         // ダメージフラグON
         damage = true;
 
         // プレイヤーの位置を後ろに飛ばす
-        float s = nockBack * Time.deltaTime;
-        transform.Translate(Vector3.forward * s);
-
-        // プレイヤーのlocalScaleでどちらを向いているのかを判定
-        if (transform.localScale.x >= 0)
+        if (tr.position.x > this.gameObject.transform.position.x)
         {
-            transform.Translate(Vector3.left * s);
+            m_rb.AddForce(transform.right * -nockBack, ForceMode2D.Impulse);
         }
         else
         {
-            transform.Translate(Vector3.right * s);
+            m_rb.AddForce(transform.right * nockBack, ForceMode2D.Impulse);
         }
+        //float s = nockBack * Time.deltaTime;
+        //transform.Translate(Vector3.forward * s);
+
+        // プレイヤーのlocalScaleでどちらを向いているのかを判定
+        //if (transform.localScale.x >= 0)
+        //{
+        //    transform.Translate(Vector3.left * s);
+        //}
+        //else
+        //{
+        //    transform.Translate(Vector3.right * s);
+        //}
 
         // コルーチン開始
         StartCoroutine("WaitForIt");
