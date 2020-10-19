@@ -4,6 +4,7 @@ public class CloudController : MonoBehaviour
 {
     [SerializeField] private float speed = 0;
     private Rigidbody2D rb;
+    public bool isRightMove;
 
     private void Start()
     {
