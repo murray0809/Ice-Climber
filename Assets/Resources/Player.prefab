@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
-  nockBack: -100
+  nockBack: 5
   attackTime: 1
   playerSprite: {fileID: 0}
   mutekiJikan: 4
