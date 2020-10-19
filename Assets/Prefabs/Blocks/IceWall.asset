@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
-  m_Name: Ice
+  m_Script: {fileID: 11500000, guid: fdc5e1eccedb29e4894bbfab99032590, type: 3}
+  m_Name: IceWall
   m_EditorClassIdentifier: 
   m_Cells:
   - m_Tile: {fileID: 0}
@@ -35,6 +35,11 @@ MonoBehaviour:
   m_Size: {x: 1, y: 1, z: 1}
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
-  m_Anchor: {x: 0.5, y: 0.6, z: 0.5}
-  m_Prefab: {fileID: 5175835108698416011, guid: 019670b336536aa48a329c2e383c103b,
-    type: 3}
+  m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
+  m_Prefabs:
+  - {fileID: 359952401239260498, guid: ff04cbde23a83294892412c1a10877f4, type: 3}
+  - {fileID: 3261593609743888188, guid: 44a0f0a972676fb4db7e606b5f7bc8fd, type: 3}
+  - {fileID: 5085212827548075166, guid: 65087ce26a0f04b4380c3ea328b8fc1c, type: 3}
+  - {fileID: 3543457374578640170, guid: 7f4929accc6dd434f8a815127b0f3912, type: 3}
+  - {fileID: 2737708790524072219, guid: e8f4a99f6aea57b4aa9d395aafd64033, type: 3}
+  m_PerlinScale: 0.5
