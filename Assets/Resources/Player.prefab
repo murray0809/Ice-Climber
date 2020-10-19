@@ -304,6 +304,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Attack_left
+  - Type: 1
+    SynchronizeType: 0
+    Name: JampAttack
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
