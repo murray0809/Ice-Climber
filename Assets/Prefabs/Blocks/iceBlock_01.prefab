@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8600432792477619090}
   - component: {fileID: 5886118605885303390}
   - component: {fileID: 100966998405370894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 7320561697615525719}
   - component: {fileID: 4296686829071872100}
   - component: {fileID: -963105860577885135}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: iceBlock_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
