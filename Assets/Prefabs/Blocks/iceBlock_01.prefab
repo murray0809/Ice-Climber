@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUnder: 0
-  particle: {fileID: 0}
-  audio: {fileID: 0}
+  particle: {fileID: 8983938895476444621, guid: 68b57c7f4b2e4ca46810e6448d522411,
+    type: 3}
 --- !u!50 &4296686829071872100
 Rigidbody2D:
   serializedVersion: 4
