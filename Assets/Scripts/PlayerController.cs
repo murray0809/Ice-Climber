@@ -19,11 +19,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] float mutekiJikan = 4; //無敵時間
 
     bool jump = false; //ジャンプの接地判定
-    float jumpAttackTime = 0;
    
-    bool attackedUp = false;
     bool attackedRight = false;
-    bool attackedLeft = false;
     bool damage = false;
 
     Vector3 scale;
@@ -73,7 +70,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (!m_view.IsMine) return;
 
         attackTime -= 0.1f;
-        Debug.Log(jumpAttackTime);
+
         if (!damage)
         {
             float h = Input.GetAxisRaw("Horizontal");
@@ -107,15 +104,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
             if (jump)
             {
                 m_anim.SetBool("Jump", true);
-                m_anim.SetBool("JumpAttack", true);
-                jumpAttackTime -= 0.1f;
-            }
-            else if (jump && jumpAttackTime <= 0)
-            {
-                m_anim.SetBool("JumpAttack", false);
             }
             else
             {
+               
                 m_anim.SetBool("Jump", false);
             }
 
@@ -124,7 +116,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
                 m_rb.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
                 jump = true;
-                jumpAttackTime = 2f;
             }
 
             if (Input.GetButtonDown("Fire1"))
