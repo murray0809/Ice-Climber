@@ -24,12 +24,8 @@ public class BrokenBrockController : MonoBehaviour
         if (IsUnder && collision.gameObject.tag == "Player")
         {
             //IsBroken = true;
+            Instantiate(particle, this.gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
-    }
-
-    private void OnDestroy()
-    {
-        Instantiate(particle, this.gameObject.transform.position, Quaternion.identity);
     }
 }
