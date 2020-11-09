@@ -13,6 +13,13 @@ public class ItemController : MonoBehaviour
     Rigidbody2D m_rb2d;
 
     GameObject player;
+
+    [SerializeField] HormingMode m_mode = HormingMode.Strict;
+
+    float m_dir = 0f; //曲がる方向
+    
+    [SerializeField] float m_playerOffsetY; //プレイヤーよりどれくらい上で動きを変化するか           
+    [SerializeField] float m_chasingPower = 1f; //カーブする時にかける力
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -20,19 +27,41 @@ public class ItemController : MonoBehaviour
         m_rb2d = GetComponent<Rigidbody2D>();
     }
 
-    
+
     void Update()
     {
-        if (moving)
+        if (m_mode == HormingMode.Strict)
         {
-            //Vector3 v = m_direction.normalized * m_bulletSpeed;   // 弾が飛ぶ速度ベクトルを計算する
-            //m_rb2d.velocity = v;                      // 速度ベクトルを弾にセットする
+            if (moving)
+            {
+                //Vector3 v = m_direction.normalized * m_bulletSpeed;   // 弾が飛ぶ速度ベクトルを計算する
+                //m_rb2d.velocity = v;                      // 速度ベクトルを弾にセットする
 
-            Vector2 dir = player.transform.position - this.transform.position;
-            dir = dir.normalized;
+                Vector2 dir = player.transform.position - this.transform.position;
+                dir = dir.normalized;
 
-            // プレイヤーに向かって飛ばす
-            m_rb2d.velocity = dir * m_bulletSpeed;
+                // プレイヤーに向かって飛ばす
+                m_rb2d.velocity = dir * m_bulletSpeed;
+            }
+        }
+        else if (m_mode == HormingMode.Easy)
+        {
+            if (moving)
+            {
+                Vector2 force = new Vector2(0, 1);
+                m_rb2d.AddForce(force, ForceMode2D.Force);
+
+                if (player.transform.position.y - this.transform.position.y < m_playerOffsetY)
+                {
+                    // 左右どちらに曲がるか判定する
+                    if (m_dir == 0)
+                    {
+                        m_dir = (player.transform.position.x > this.transform.position.x) ? 1 : -1;
+
+                    }
+                    m_rb2d.AddForce(m_dir * Vector2.right * m_chasingPower);
+                }
+            }
         }
     }
 
@@ -44,4 +73,10 @@ public class ItemController : MonoBehaviour
             moving = true;
         }
     }
+
+}
+public enum HormingMode
+{
+    Strict,
+    Easy,
 }
