@@ -7,14 +7,11 @@ public class BrokenBrockController : MonoBehaviour
     public bool IsUnder = false;
     public GameObject particle;
     new ParticleSystem  particleSystem;
-    public new AudioClip audio;
-    AudioSource audioSource;
     //[SerializeField] private bool IsBroken = false;
 
     private void Start()
     {
         particleSystem = particle.GetComponent<ParticleSystem>();
-        audioSource = this.gameObject.GetComponent<AudioSource>();
     }
 
     //private void Update()
@@ -34,6 +31,5 @@ public class BrokenBrockController : MonoBehaviour
     private void OnDestroy()
     {
         Instantiate(particle, this.gameObject.transform.position, Quaternion.identity);
-        audioSource.PlayOneShot(audio);
     }
 }
