@@ -8,11 +8,15 @@ public class Timer : MonoBehaviour
     [SerializeField] float time;
     [SerializeField] int minutes;
     [SerializeField] int second;
+    [SerializeField] GameObject load;
+    [SerializeField] string sceneName = "GameOver";
+    LoadScene loadScene;
     bool isWorking;
     [SerializeField] Text timerText;
     void Start()
     {
         isWorking = true;
+        loadScene = load.GetComponent<LoadScene>();
     }
 
     void Update()
@@ -29,6 +33,7 @@ public class Timer : MonoBehaviour
             if (time <= 0)
             {
                 isWorking = false;
+                loadScene.Load(sceneName);
             }
         }
     }
