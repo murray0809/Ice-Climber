@@ -6,18 +6,26 @@ public class LeftSideChange : MonoBehaviour
 {
     [SerializeField] private GameObject m_another;
     [SerializeField] private float a = 1.1f;
+    private Vector3 transform;
+    [SerializeField] private bool isCloud;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 10)
+        transform = collision.gameObject.transform.position;
+        if (isCloud)
         {
-            a = 3.0f;
+            if (collision.gameObject.layer == 10 && !collision.gameObject.GetComponent<CloudController>().isRightMove)
+            {
+                collision.gameObject.transform.position = new Vector3(m_another.transform.position.x, transform.y, transform.z);
+            }
         }
         else
         {
-            a = 1.1f;
+            if (collision.gameObject.layer != 10)
+            {
+                collision.gameObject.transform.position = new Vector3(m_another.transform.position.x - a, transform.y, transform.z);
+            }
         }
-        Vector3 transform = collision.gameObject.transform.position;
-        collision.gameObject.transform.position = new Vector3(m_another.transform.position.x - a, transform.y, transform.z);
+        
     }
 }
