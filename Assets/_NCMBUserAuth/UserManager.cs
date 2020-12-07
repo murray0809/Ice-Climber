@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NCMB;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// ユーザー管理をするコンポーネント
@@ -239,8 +240,28 @@ public class UserManager : MonoBehaviour
         });
     }
 
+    ///  <summary>
+    ///  ユーザー情報を消去する
+    ///  </summary>   
     public void UserDelete()
     {
         NCMBUser.CurrentUser.DeleteAsync();
+    }
+
+    /// <summary>
+    /// GameSceneに移行する
+    /// ログインしている必要がある
+    /// </summary>
+    public void GameStart()
+    {
+        if (NCMBUser.CurrentUser != null)
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            Debug.Log("Not logged in. Log in first.");
+        }
+        
     }
 }
