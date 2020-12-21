@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 300
-  minutes: 0
-  second: 0
+  load: {fileID: 822783460}
+  sceneName: GameOver
   timerText: {fileID: 2131592185}
 --- !u!4 &822783462
 Transform:
