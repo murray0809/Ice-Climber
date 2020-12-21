@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     bool jump = false; //ジャンプの接地判定
    
     bool attackedRight = false;
-    bool damage = false;
+    bool freeze = false;
 
     Vector3 scale;
 
@@ -71,7 +71,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         attackTime -= 0.1f;
 
-        if (!damage)
+        if (Input.GetKey(KeyCode.G))
+        {
+            Raise();
+        }
+
+        if (!freeze)
         {
             float h = Input.GetAxisRaw("Horizontal");
 
@@ -137,7 +142,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             }
         }
         //ダメージを受けたときの点滅判定
-        if (damage)
+        if (freeze)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             playerSprite.color = new Color(1f, 1f, 1f, level);
@@ -146,7 +151,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (!damage)
+        if (!freeze)
         {
             jump = false;
         }
@@ -154,7 +159,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!damage)
+        if (!freeze)
         {
             //敵に当たったかどうかの判定
             if (collision.gameObject.tag == "enemy")
@@ -169,7 +174,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void DamageEffect(Transform tr)
     {
         // ダメージフラグON
-        damage = true;
+        freeze = true;
 
         // プレイヤーの位置を後ろに飛ばす
         if (tr.position.x > this.gameObject.transform.position.x)
@@ -203,12 +208,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(4);
 
         // １秒後ダメージフラグをfalseにして点滅を戻す
-        damage = false;
+        freeze = false;
         playerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void Raise()
     {
+        freeze = true;
         //イベントとして送るものを作る
         byte eventCode = 0; // イベントコード 0~199 まで指定できる。200 以上はシステムで使われているので使えない。
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions
@@ -221,6 +227,29 @@ public class PlayerController : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(eventCode, actorNumber, raiseEventOptions, sendOptions);
     }
 
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += EventReceived;
+    }
+
+    /// <summary>オブジェクトが無効になった時にイベントからメソッドを解除する</summary>
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= EventReceived;
+    }
+    /// <summary>
+    /// イベントデータとして渡された内容をログに出力する
+    /// </summary>
+    /// <param name="e">イベントデータ</param>
+    void EventReceived(EventData e)
+    {
+        if ((int)e.Code < 1)
+        {
+            Debug.LogError("Goal");
+            freeze = true;
+        }
+    }
+    
     [PunRPC]
     void AttackRight()
     {

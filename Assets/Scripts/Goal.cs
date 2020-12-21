@@ -9,12 +9,16 @@ using ExitGames.Client.Photon;  // EventData を使うため
 public class Goal : MonoBehaviour
 {
     [SerializeField] private GameObject text;
+    [SerializeField] string sceneName = "Result";
+    LoadScene loadScene;
     private Text goal;
     private bool isGoal = false;
 
     private void Start()
     {
+        loadScene = this.gameObject.GetComponent<LoadScene>();
         goal = text.GetComponent<Text>();
+        Debug.LogError(loadScene);
     }
 
     /// <summary>オブジェクトが有効になった時にイベントにメソッドを登録する</summary>
@@ -37,9 +41,10 @@ public class Goal : MonoBehaviour
     {
         if ((int)e.Code < 1)  // 200 以上はシステムで使われているので処理しない
         {
+            loadScene.Load(sceneName);
             isGoal = true;
             goal.text = e.CustomData + "P Goal!!";
-            Time.timeScale = 0;
+            Time.timeScale = 0.5f;
         }
     }
 
