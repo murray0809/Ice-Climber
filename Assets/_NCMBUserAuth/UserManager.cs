@@ -260,8 +260,23 @@ public class UserManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not logged in. Log in first.");
+            Debug.LogWarning("Not logged in. Log in first.");
         }
-        
+    }
+
+    /// <summary>
+    /// LobbySceneに移行する
+    /// ログインしている必要がある
+    /// </summary>
+    public void LoadLobby()
+    {
+        if (NCMBUser.CurrentUser != null)
+        {
+            SceneManager.LoadScene("Lobby");
+        }
+        else
+        {
+            Debug.LogWarning("Not logged in. Log in first.");
+        }
     }
 }

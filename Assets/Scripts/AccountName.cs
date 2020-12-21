@@ -19,7 +19,6 @@ public class AccountName : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(player.lossyScale);
         if (player.lossyScale.x > 0)
         {
             gameObject.transform.localScale = left;

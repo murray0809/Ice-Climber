@@ -2194,13 +2194,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1175606812}
-  m_Father: {fileID: 1728423680}
+  m_Father: {fileID: 1090872659}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -60, y: 11}
-  m_SizeDelta: {x: 112.04999, y: 25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919860493
 MonoBehaviour:
@@ -2246,7 +2246,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 641984082}
-        m_MethodName: GameStart
+        m_MethodName: LoadLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2536,6 +2536,7 @@ RectTransform:
   - {fileID: 1920307524}
   - {fileID: 1940052747}
   - {fileID: 82505235}
+  - {fileID: 919860492}
   m_Father: {fileID: 1728423680}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2961,7 +2962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game Start
+  m_Text: Lobby
 --- !u!222 &1175606814
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4415,7 +4416,6 @@ RectTransform:
   - {fileID: 1489208201}
   - {fileID: 597204491}
   - {fileID: 9468142}
-  - {fileID: 919860492}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
