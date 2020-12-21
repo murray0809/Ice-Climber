@@ -41,7 +41,7 @@ public class Goal : MonoBehaviour
     {
         if ((int)e.Code < 1)  // 200 以上はシステムで使われているので処理しない
         {
-            //loadScene.Load(sceneName);
+            loadScene.Load(sceneName);
             isGoal = true;
             goal.text = e.CustomData + "P Goal!!";
             Time.timeScale = 0.5f;
