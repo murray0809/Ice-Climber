@@ -12,7 +12,10 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
     [SerializeField] string m_playerPrefabName = "Player";
     [SerializeField] Transform m_spawnPoint01 = default;
     [SerializeField] Transform m_spawnPoint02 = default;
-   // [SerializeField] Transform[] m_spawnPositions = default;
+    // [SerializeField] Transform[] m_spawnPositions = default;
+
+    [SerializeField] string m_itemPrefabName = "Item";
+    [SerializeField] Transform[] m_itemSpawn = new Transform[3];
 
     private void Awake()
     {
@@ -132,6 +135,10 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
         }
     }
 
+    private void ItemSpawn()
+    {
+        GameObject item = PhotonNetwork.Instantiate(m_itemPrefabName, Vector3.zero, Quaternion.identity);
+    }
     /* ***********************************************
      * 
      * これ以降は Photon の Callback メソッド
@@ -188,6 +195,7 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime �
     {
         Debug.Log("OnJoinedRoom");
         SpawnPlayer();
+        ItemSpawn();
     }
 
     /// <summary>指定した部屋への入室に失敗した時</summary>
