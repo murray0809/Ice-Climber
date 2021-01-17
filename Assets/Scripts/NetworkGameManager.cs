@@ -137,7 +137,13 @@ public class NetworkGameManager : MonoBehaviourPunCallbacks // Photon Realtime ç
 
     private void ItemSpawn()
     {
-        GameObject item = PhotonNetwork.Instantiate(m_itemPrefabName, Vector3.zero, Quaternion.identity);
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject item = PhotonNetwork.Instantiate(m_itemPrefabName, Vector3.zero, Quaternion.identity);
+
+            item.transform.position = m_itemSpawn[i].position;
+        }
+        
     }
     /* ***********************************************
      * 
